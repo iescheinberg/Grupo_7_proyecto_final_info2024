@@ -1,11 +1,30 @@
-<!DOCTYPE html>
-<html lang="es-ar">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto Informatorio</title>
-</head>
-<body>
-    <h1>Pagina de Inicio</h1>
-</body>
-</html>
+{% extends 'base.html '%}
+{% load static %}
+{% block titulo %}
+<title>Inicio</title>
+{% endblock %}
+{% block navegacion %}
+    {% if user.is_authenticated %}
+        <form method="post" action="{% url 'apps.blog_auth:cerrar_sesion' %}">
+            {% csrf_token %}
+            <button type="submit" class="dropdown-item">Cerrar sesión</button>
+        </form>
+    {% endif %}
+    <form method="post" action="{% url 'apps.blog_auth:registro' %}">
+        {% csrf_token %}
+        <button type="submit" class="dropdown-item">Registrarse</button>
+    </form>
+<form method="post" action="{% url 'apps.blog_auth:sesion' %}">
+    {% csrf_token %}
+    <button type="submit" class="dropdown-item">Iniciar sesión</button>
+</form>
+    {% if user.is_authenticated %}
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+        data-bs-toggle="dropdown" aria-expanded="false">
+        {{ user.username }}
+    </button>
+    {% endif %}
+{% endblock %}
+{% block contenido %}
+<h1>INICIO</h1>
+{% endblock %}
