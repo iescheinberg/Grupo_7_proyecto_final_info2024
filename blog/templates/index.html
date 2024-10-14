@@ -9,20 +9,29 @@
             {% csrf_token %}
             <button type="submit" class="dropdown-item">Cerrar sesión</button>
         </form>
-    {% endif %}
+    {% else %}
+    <form method="post" action="{% url 'apps.blog_auth:sesion' %}">
+        {% csrf_token %}
+        <button type="submit" class="dropdown-item">Iniciar sesión</button>
+    </form>
     <form method="post" action="{% url 'apps.blog_auth:registro' %}">
         {% csrf_token %}
         <button type="submit" class="dropdown-item">Registrarse</button>
     </form>
-<form method="post" action="{% url 'apps.blog_auth:sesion' %}">
-    {% csrf_token %}
-    <button type="submit" class="dropdown-item">Iniciar sesión</button>
-</form>
+    {% endif %}
+    
+
     {% if user.is_authenticated %}
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
         data-bs-toggle="dropdown" aria-expanded="false">
         {{ user.username }}
     </button>
+    {% endif %}
+    {% if perms.post.add_articulo %}
+        <form method="post" action="{% url 'apps.post:agregar_articulo' %}">
+            {% csrf_token %}
+            <button type="submit" class="dropdown-item">Agregar articulo</button>
+        </form>
     {% endif %}
 {% endblock %}
 {% block contenido %}
