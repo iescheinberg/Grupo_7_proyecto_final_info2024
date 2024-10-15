@@ -32,6 +32,18 @@
             {% csrf_token %}
             <button type="submit" class="dropdown-item">Agregar articulo</button>
         </form>
+        <form method="post" action="{% url 'apps.post:actualizar_articulo' %}">
+            {% csrf_token %}
+            <button type="submit" class="dropdown-item">Actualizar articulo</button>
+        </form>
+        <form method="post" action="{% url 'apps.post:eliminar_articulo' %}">
+            {% csrf_token %}
+            <button type="submit" class="dropdown-item">Eliminar articulo</button>
+        </form>
+        <form method="post" action="{% url 'apps.post:listar_articulo' %}">
+            {% csrf_token %}
+            <button type="submit" class="dropdown-item">Listar articulo</button>
+        </form>
     {% endif %}
 {% endblock %}
 {% block contenido %}
