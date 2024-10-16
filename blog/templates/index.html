@@ -6,10 +6,7 @@
 {% block navegacion %}
     {% if user.is_authenticated %}
         
-        <form method="post" action="{% url 'apps.blog_auth:cerrar_sesion' %}">
-            {% csrf_token %}
-            <button type="submit" class="dropdown-item">Cerrar sesión</button>
-        </form>
+        
     {% else %}
     <form method="post" action="{% url 'apps.blog_auth:sesion' %}">
         {% csrf_token %}
@@ -23,10 +20,18 @@
     
 
     {% if user.is_authenticated %}
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-        data-bs-toggle="dropdown" aria-expanded="false">
-        {{ user.username }}
-    </button>
+    <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                {{ user.username }}
+            </button>
+            <div class="dropdown-content">
+            <form method="post" action="{% url 'apps.blog_auth:cerrar_sesion' %}">
+                {% csrf_token %}
+                <button type="submit" class="dropdown-item">Cerrar sesión</button>
+            </form>
+            </div>
+        </div>
     {% endif %}
     {% if perms.post.add_articulo %}
         <div class="dropdown">
