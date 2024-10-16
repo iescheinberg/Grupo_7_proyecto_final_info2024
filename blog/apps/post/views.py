@@ -22,10 +22,11 @@ class EliminarArticulo(DeleteView):
     template_name = 'articulos/Eliminar_articulo.html'
     success_url = reverse_lazy('index')
 
-class ListarArticulo(ListView):
+class ListarArticulos(ListView):
     model = Articulo
     template_name = 'articulos/listar_articulos.html'
     context_object_name = 'articulos'
+    paginate_by = 3
 
     def get_context_data(self):
         context = super().get_context_data()

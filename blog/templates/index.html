@@ -1,10 +1,11 @@
-{% extends 'base.html '%}
+{% extends 'base.html'%}
 {% load static %}
 {% block titulo %}
 <title>Inicio</title>
 {% endblock %}
 {% block navegacion %}
     {% if user.is_authenticated %}
+        
         <form method="post" action="{% url 'apps.blog_auth:cerrar_sesion' %}">
             {% csrf_token %}
             <button type="submit" class="dropdown-item">Cerrar sesión</button>
@@ -28,24 +29,15 @@
     </button>
     {% endif %}
     {% if perms.post.add_articulo %}
-        <form method="post" action="{% url 'apps.post:agregar_articulo' %}">
-            {% csrf_token %}
-            <button type="submit" class="dropdown-item">Agregar articulo</button>
-        </form>
-        <form method="post" action="{% url 'apps.post:actualizar_articulo' %}">
-            {% csrf_token %}
-            <button type="submit" class="dropdown-item">Actualizar articulo</button>
-        </form>
-        <form method="post" action="{% url 'apps.post:eliminar_articulo' %}">
-            {% csrf_token %}
-            <button type="submit" class="dropdown-item">Eliminar articulo</button>
-        </form>
-        <form method="post" action="{% url 'apps.post:listar_articulo' %}">
-            {% csrf_token %}
-            <button type="submit" class="dropdown-item">Listar articulo</button>
-        </form>
+        <div class="dropdown">
+            <button>-----Articulo-----</button>
+            <div class="dropdown-content">
+            <a href="{% url 'apps.post:agregar_articulo' %}">Agregar</a>
+            <a href="{% url 'apps.post:listar_articulos' %}">Listar</a>
+            </div>
+        </div>
     {% endif %}
 {% endblock %}
 {% block contenido %}
-<h1>INICIO</h1>
+<h1></h1>
 {% endblock %}
